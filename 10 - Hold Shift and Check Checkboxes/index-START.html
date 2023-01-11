@@ -98,18 +98,18 @@
   <script>
     const checkboxes = document.querySelectorAll('.inbox input[type="checkbox"]');
 
-    let lastChecked;
+    let lastChecked = checkboxes[0];
     
     function handleCheck(e) {
       let inBetween = false;
 
-      if (e.shiftKey && this.checked) {
+      if (e.shiftKey && this.checked && lastChecked != this) {
         checkboxes.forEach(checkbox => {
           if (checkbox === this || checkbox === lastChecked) {
             inBetween = !inBetween;
           }
 
-          if (inBetween) {
+          if (inBetween && lastChecked.checked) {
             checkbox.checked = true;
           }
         });
