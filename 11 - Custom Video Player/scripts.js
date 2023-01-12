@@ -36,6 +36,12 @@ function scrub(e) {
   video.currentTime = scrubTime;
 }
 
+function openFullscreen() {
+  if (video.requestFullscreen) {
+    video.requestFullscreen();
+  }
+}
+
 // Hook up event listeners
 video.addEventListener('click', togglePlay);
 video.addEventListener('play', updateButton);
