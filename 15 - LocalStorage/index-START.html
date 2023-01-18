@@ -23,12 +23,19 @@
       <input type="text" name="item" placeholder="Item Name" required>
       <input type="submit" value="+ Add Item">
     </form>
+    <form class="nuclear-options">
+      <input type="submit" class="check-all" value="Check All">
+      <input type="submit" class="uncheck-all" value="Uncheck All">
+      <input type="reset" value="Clear All" style="background-color: rgb(212, 73, 91); color: white;">
+    </form>
   </div>
 
 <script>
   const addItems = document.querySelector('.add-items');
   const itemsList = document.querySelector('.plates');
   const items = JSON.parse(localStorage.getItem('items')) || [];
+  const checkAll = document.querySelector('.check-all');
+  const uncheckAll = document.querySelector('.uncheck-all');
 
   function addItem(e) {
     e.preventDefault();
@@ -63,8 +70,22 @@
     populateList(items, itemsList);
   }
 
+  function handleCheckAll(e) {
+    items.forEach(item => item.done = true);
+    localStorage.setItem('items', JSON.stringify(items));
+    populateList(items, itemsList);
+  }
+
+  function handleUncheckAll(e) {
+    items.forEach(item => item.done = false);
+    localStorage.setItem('items', JSON.stringify(items));
+    populateList(items, itemsList);
+  }
+
   addItems.addEventListener('submit', addItem);
   itemsList.addEventListener('click', toggleDone);
+  checkAll.addEventListener('click', handleCheckAll);
+  uncheckAll.addEventListener('click', handleUncheckAll);
   populateList(items, itemsList);
 </script>
 
